@@ -26,8 +26,11 @@ import java.sql.PreparedStatement;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.Font;
+import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+import javax.swing.JTree;
 
-public class SignUp {
+public class SignUp extends JFrame{
 	String gender;
 	JTextField password;
 	private JFrame frmSignUp;
@@ -51,16 +54,22 @@ public class SignUp {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SignUp window = new SignUp();
-					window.frmSignUp.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					SignUp window = new SignUp();
+//					window.frmSignUp.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+		try {
+			SignUp window = new SignUp();
+			window.frmSignUp.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -73,7 +82,7 @@ public class SignUp {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	public void initialize() {
 		frmSignUp = new JFrame();
 		frmSignUp.setTitle("SIGN UP");
 		frmSignUp.getContentPane().setBackground(new Color(192, 192, 192));
@@ -205,7 +214,8 @@ public class SignUp {
 		textField_9.setColumns(10);
 		
 		boolean b=true ;
-		
+		String password;
+		String confirmPassword;
 		JLabel lblNewLabel_11 = new JLabel("Password");
 		lblNewLabel_11.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel_11.setBounds(639, 333, 60, 14);
@@ -215,7 +225,7 @@ public class SignUp {
 		textField_12.setBounds(733, 333, 123, 20);
 		frmSignUp.getContentPane().add(textField_12);
 		textField_12.setColumns(10);
-		
+		password=textField_12.getText();
 		JLabel lblNewLabel_12 = new JLabel("Confirm Password");
 		lblNewLabel_12.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel_12.setBounds(632, 358, 100, 14);
@@ -225,8 +235,9 @@ public class SignUp {
 		textField_13.setBounds(733, 356, 123, 20);
 		frmSignUp.getContentPane().add(textField_13);
 		textField_13.setColumns(10);
+		confirmPassword=textField_13.getText();
 		
-		if(textField_12.getText().equals(textField_13.getText())) {
+		if(password.equals(confirmPassword)) {
 			b=false;
 			//password.setText(textField_12.getText());
 			//password.setText(textField_12.getText());
@@ -237,6 +248,8 @@ public class SignUp {
 		}while(b==true);
 		
 		JButton btnNewButton = new JButton("SIGN UP");
+		btnNewButton.setBackground(new Color(128, 128, 255));
+		btnNewButton.setForeground(new Color(0, 0, 0));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -271,9 +284,47 @@ public class SignUp {
 				}
 			}
 		});
+		
+		JButton btnNewButton_1 = new JButton("RESET");
+		btnNewButton_1.setBackground(new Color(128, 128, 255));
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					textField.setText("");
+					textField_1.setText("");
+					textField_2.setText("");
+					textField_3.setText("");
+					textField_4.setText("");
+					textField_5.setText("");
+					textField_6.setText("");
+					textField_7.setText("");
+					textField_8.setText("");
+					textField_9.setText("");
+					textField_12.setText("");
+					textField_13.setText("");
+				}catch(Exception e2) {
+					System.out.println(e2.getMessage());
+				}
+			}
+			});
+		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnNewButton_1.setBounds(820, 415, 100, 35);
+		frmSignUp.getContentPane().add(btnNewButton_1);
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnNewButton.setBounds(700, 415, 100, 35);
+		btnNewButton.setBounds(650, 415, 100, 35);
 		frmSignUp.getContentPane().add(btnNewButton);
+		
+		JButton btnNewButton_2 = new JButton("Attach Profile Image");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser newFile= new JFileChooser();
+				newFile.showOpenDialog(null);
+			}
+		});
+		btnNewButton_2.setBounds(680, 20, 150, 23);
+		frmSignUp.getContentPane().add(btnNewButton_2);
+		
+		
 		
 		
 		
@@ -295,11 +346,5 @@ public class SignUp {
 //		ButtonGroup group = new ButtonGroup();
 //	}
 	}
-//	private class SwingAction extends AbstractAction {
-//		public SwingAction() {
-//			putValue(NAME, "SwingAction");
-//			putValue(SHORT_DESCRIPTION, "Some short description");
-//		}
-//		
 	}
 
